@@ -1,4 +1,3 @@
-
 from moviepy.video.io.VideoFileClip import VideoFileClip
 import os
 
@@ -47,14 +46,13 @@ def cut_video_in_specific_time(input_file, segment_times):
         segment.write_videofile(os.path.join(video_title, output_file), codec='libx264')
 
 # Get input from user
-print(f"HELLO\n#############################\nPUT file to src folder\nNOTE: The video title u input in the next step have to be equal with the file name in the src folder\n\n")
 video_title = input('Enter video title: ')
-split_method = input('Enter split method: \n     1. by_time \n     2. specific_time\n->')
+split_method = input('Enter split method (by_time or specific_time): ')
 
 # Load the video file
-input_file = os.path.join('src', f'{video_title}.mp4')
+input_file = os.path.join('input', f'{video_title}.mp4')
 
-if split_method == 'by_time' or split_method == '1':
+if split_method == 'by_time':
     segment_duration = float(input('Enter segment duration in minutes: ')) * 60
     # Calculate the number of segments
     video = VideoFileClip(input_file)
@@ -63,7 +61,7 @@ if split_method == 'by_time' or split_method == '1':
     print(f'Predicted number of exported files: {num_segments}')
     # Split the video by time
     split_video_by_time(input_file, segment_duration)
-elif split_method == 'specific_time' or split_method == '2':
+elif split_method == 'specific_time':
     num_segments = int(input('Enter number of segments: '))
     segment_times = []
     for i in range(num_segments):
@@ -73,8 +71,7 @@ elif split_method == 'specific_time' or split_method == '2':
     print(f'Predicted number of exported files: {num_segments}')
     # Cut the video at specific times
     cut_video_in_specific_time(input_file, segment_times)
-else:
-    print("are u stupid dude?")
+
 # Create output folder if it doesn't exist
 output_folder = os.path.join(os.getcwd(), video_title)
 if not os.path.exists(output_folder):

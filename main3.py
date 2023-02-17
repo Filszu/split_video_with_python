@@ -1,3 +1,4 @@
+
 from moviepy.video.io.VideoFileClip import VideoFileClip
 import os
 
@@ -53,6 +54,11 @@ split_method = input('Enter split method: \n     1. by_time \n     2. specific_t
 # Load the video file
 input_file = os.path.join('src', f'{video_title}.mp4')
 
+# Create output folder if it doesn't exist
+output_folder = os.path.join(os.getcwd(), video_title)
+if not os.path.exists(video_title):
+    os.makedirs(video_title, exist_ok=True)
+
 if split_method == 'by_time' or split_method == '1':
     segment_duration = float(input('Enter segment duration in minutes: ')) * 60
     # Calculate the number of segments
@@ -74,7 +80,3 @@ elif split_method == 'specific_time' or split_method == '2':
     cut_video_in_specific_time(input_file, segment_times)
 else:
     print("are u stupid dude?")
-# Create output folder if it doesn't exist
-output_folder = os.path.join(os.getcwd(), video_title)
-if not os.path.exists(output_folder):
-    os.makedirs(output_folder)
