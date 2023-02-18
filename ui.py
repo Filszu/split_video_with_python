@@ -2,7 +2,7 @@ import tkinter as tk
 
 # Create the main window
 window = tk.Tk()
-window.title("Movie Converter")
+window.title("Split a Movie")
 
 # Create the text edit for entering the movie name
 movie_label = tk.Label(window, text="Enter Movie Name:")
